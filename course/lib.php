@@ -3848,7 +3848,7 @@ function save_local_role_names($courseid, $data) {
  * @return object new course instance
  */
 function create_course($data, $editoroptions = NULL) {
-    global $CFG, $DB;
+    global $CFG, $DB, $USER;
 
     //check the categoryid - must be given for all new courses
     $category = $DB->get_record('course_categories', array('id'=>$data->category), '*', MUST_EXIST);
@@ -3869,6 +3869,9 @@ function create_course($data, $editoroptions = NULL) {
 
     $data->timecreated  = time();
     $data->timemodified = $data->timecreated;
+
+    $data->usercreated  = $USER->id;
+    $data->usermodified  = $USER->id;
 
     // place at beginning of any category
     $data->sortorder = 0;
@@ -3962,9 +3965,10 @@ function create_course_category($category) {
  * @return void
  */
 function update_course($data, $editoroptions = NULL) {
-    global $CFG, $DB;
+    global $CFG, $DB, $USER;
 
     $data->timemodified = time();
+    $data->usermodified = $USER->id;
 
     $oldcourse = $DB->get_record('course', array('id'=>$data->id), '*', MUST_EXIST);
     $context   = context_course::instance($oldcourse->id);

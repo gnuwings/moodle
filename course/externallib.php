@@ -233,6 +233,8 @@ class core_course_external extends external_api {
                                                   'content' => new external_value(PARAM_RAW, 'Raw content, will be used when type is content', VALUE_OPTIONAL),
                                                   'timecreated' => new external_value(PARAM_INT, 'Time created'),
                                                   'timemodified' => new external_value(PARAM_INT, 'Time modified'),
+                                                  'usercreated' => new external_value(PARAM_INT, 'User who created the course'),
+                                                  'usermodified' => new external_value(PARAM_INT, 'User who modified the course'),
                                                   'sortorder' => new external_value(PARAM_INT, 'Content sort order'),
 
                                                   // copyright related info
@@ -336,6 +338,8 @@ class core_course_external extends external_api {
                 $courseinfo['lang'] = $course->lang;
                 $courseinfo['timecreated'] = $course->timecreated;
                 $courseinfo['timemodified'] = $course->timemodified;
+                $courseinfo['usercreated'] = $course->usercreated;
+                $courseinfo['usermodified'] = $course->usermodified;
                 $courseinfo['forcetheme'] = $course->theme;
                 $courseinfo['enablecompletion'] = $course->enablecompletion;
                 $courseinfo['completionstartonenrol'] = $course->completionstartonenrol;
@@ -399,6 +403,10 @@ class core_course_external extends external_api {
                                     'timestamp when the course have been created', VALUE_OPTIONAL),
                             'timemodified' => new external_value(PARAM_INT,
                                     'timestamp when the course have been modified', VALUE_OPTIONAL),
+                            'usercreated' => new external_value(PARAM_INT,
+                                    'user who created the course', VALUE_OPTIONAL),
+                            'usermodified' => new external_value(PARAM_INT,
+                                    'user who modified the course', VALUE_OPTIONAL),
                             'enablecompletion' => new external_value(PARAM_INT,
                                     'Enabled, control via completion and activity settings. Disbaled,
                                         not shown in activity settings.',
